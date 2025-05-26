@@ -53,15 +53,33 @@ This document provides a comprehensive comparison of different reinforcement lea
 | PPO | Policy-based, On-policy | Clipped objective, Multiple epochs | Stable, Simple | Less sample efficient | General tasks |
 | A3C | Actor-Critic, On-policy | Asynchronous updates, Multiple agents | Parallel learning | Complex implementation | Distributed systems |
 
+### 4.3 Monte Carlo Methods Comparison
+
+| Method | Type | Update Frequency | Bias | Variance | Sample Efficiency |
+|--------|------|------------------|------|----------|-------------------|
+| First-Visit MC | On-policy | Episode end | Unbiased | High | Low |
+| Every-Visit MC | On-policy | Episode end | Biased | High | Low |
+| Off-Policy MC | Off-policy | Episode end | Unbiased | High | Low |
+| MC Control | On-policy | Episode end | Unbiased | High | Low |
+
+#### Monte Carlo Variants
+
+| Variant | Key Features | Advantages | Disadvantages | Best For |
+|---------|--------------|------------|---------------|----------|
+| First-Visit MC | Updates only first visit to state | Unbiased estimates | High variance | Episodic tasks |
+| Every-Visit MC | Updates every visit to state | More updates | Biased estimates | Long episodes |
+| Off-Policy MC | Uses importance sampling | Can use any policy | High variance | Off-policy learning |
+| MC Control | Updates policy directly | Simple implementation | Slow learning | Policy optimization |
+
 ## 5. Performance Metrics Comparison
 
-| Metric | Value-Based | Policy-Based | Actor-Critic |
-|--------|-------------|--------------|--------------|
-| **Sample Efficiency** | Low | Medium | High |
-| **Stability** | High | Low | Medium |
-| **Convergence Speed** | Slow | Fast | Medium |
-| **Memory Usage** | High | Low | Medium |
-| **Computation Cost** | Low | High | Medium |
+| Metric | Value-Based | Policy-Based | Actor-Critic | Monte Carlo |
+|--------|-------------|--------------|--------------|-------------|
+| **Sample Efficiency** | Low | Medium | High | Very Low |
+| **Stability** | High | Low | Medium | Low |
+| **Convergence Speed** | Slow | Fast | Medium | Very Slow |
+| **Memory Usage** | High | Low | Medium | Low |
+| **Computation Cost** | Low | High | Medium | Low |
 
 ## 6. Application Scenarios
 
@@ -71,6 +89,7 @@ This document provides a comprehensive comparison of different reinforcement lea
 | Robotics | DDPG, SAC | Continuous action spaces, real-time control |
 | Resource Management | Q-Learning, SARSA | Discrete actions, model-free |
 | Natural Language Processing | PPO, A2C | Complex policies, continuous learning |
+| Episodic Tasks | Monte Carlo | Complete episode information available |
 
 ## 7. Implementation Complexity
 
@@ -82,6 +101,7 @@ This document provides a comprehensive comparison of different reinforcement lea
 | DDPG | High | Large | Many |
 | PPO | Medium | Medium | Many |
 | A3C | High | Large | Many |
+| Monte Carlo | Low | Small | Few |
 
 ## 8. Summary
 
@@ -91,6 +111,7 @@ This comparison provides a high-level overview of different reinforcement learni
    - State space complexity
    - Action space type (discrete/continuous)
    - Environment dynamics
+   - Episode structure (episodic vs continuous)
 
 2. **Resource Constraints**:
    - Available computation power
@@ -101,6 +122,7 @@ This comparison provides a high-level overview of different reinforcement learni
    - Sample efficiency
    - Convergence speed
    - Stability needs
+   - Bias-variance trade-off
 
 4. **Implementation Considerations**:
    - Development time
@@ -112,4 +134,5 @@ This comparison provides a high-level overview of different reinforcement learni
 1. Sutton, R. S., & Barto, A. G. (2018). Reinforcement learning: An introduction. MIT press.
 2. Mnih, V., et al. (2015). Human-level control through deep reinforcement learning. Nature, 518(7540), 529-533.
 3. Schulman, J., et al. (2017). Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347.
-4. Lillicrap, T. P., et al. (2015). Continuous control with deep reinforcement learning. arXiv preprint arXiv:1509.02971. 
+4. Lillicrap, T. P., et al. (2015). Continuous control with deep reinforcement learning. arXiv preprint arXiv:1509.02971.
+5. Singh, S., & Sutton, R. S. (1996). Reinforcement learning with replacing eligibility traces. Machine learning, 22(1-3), 123-158. 
