@@ -1,29 +1,16 @@
 # Temporal Difference Learning in Reinforcement Learning
 
-## 0. A Story About Learning to Cook
+## 0. A Concrete Example: Food Delivery Tracking
 
-Imagine you're learning to cook a new recipe. There are two ways you could learn:
+Imagine you order food delivery through an app. The app initially estimates your food will arrive in 30 minutes. As you wait, you keep checking the app and update your expectation based on new information:
 
-**Method 1 (Monte Carlo)**: You cook the entire dish, taste it at the end, and think "This is too salty. Next time I'll use less salt." You have to wait until you finish cooking to learn anything.
+- **At order time**: The app says delivery will take 30 minutes. You expect to eat at 7:00pm.
+- **10 minutes later**: The app shows the courier has just picked up your food and now estimates 25 minutes left. You update your expectation: maybe 7:05pm.
+- **5 minutes later**: The courier is on the way, but traffic is heavy. The app now says 20 minutes left. You adjust your expectation to 7:10pm.
+- **Suddenly, the courier stops moving on the map**: The app adds 5 more minutes to the estimate. You now expect 7:15pm.
+- **Finally, the courier enters your neighborhood**: The app says 3 minutes left. You expect to get your food at 7:13pm.
 
-**Method 2 (Temporal Difference)**: You learn as you cook. For example:
-- When you add salt: "I think this amount of salt will make it just right."
-- After tasting the sauce: "Hmm, it's saltier than I expected. I need to adjust my understanding of how much salt is needed."
-- When you add the next ingredient: "Based on my previous adjustment, I think this amount will work better."
-
-The second method (TD) is more effective because:
-1. You learn from each step, not just the final result
-2. You constantly adjust your expectations based on what actually happens
-3. You don't need to finish cooking to improve
-4. Your understanding gets better with each adjustment
-
-This is exactly how Temporal Difference learning works in reinforcement learning. At each step, it:
-1. Makes a prediction about what will happen
-2. Sees what actually happens
-3. Calculates the difference between prediction and reality
-4. Uses this difference to improve its next prediction
-
-This continuous cycle of prediction, observation, and adjustment makes TD learning both efficient and adaptable.
+At each step, you revise your prediction of when the food will arrive, based on the latest available information. You don't wait until the food actually arrives to learn; instead, you continuously update your expectations as new data comes in. This is the essence of Temporal Difference learning: learning and adjusting predictions step by step, as new evidence appears, rather than only after the final outcome is known.
 
 ## 1. Introduction
 
