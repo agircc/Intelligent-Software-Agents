@@ -1,5 +1,30 @@
 # Temporal Difference Learning in Reinforcement Learning
 
+## 0. A Story About Learning to Cook
+
+Imagine you're learning to cook a new recipe. There are two ways you could learn:
+
+**Method 1 (Monte Carlo)**: You cook the entire dish, taste it at the end, and think "This is too salty. Next time I'll use less salt." You have to wait until you finish cooking to learn anything.
+
+**Method 2 (Temporal Difference)**: You learn as you cook. For example:
+- When you add salt: "I think this amount of salt will make it just right."
+- After tasting the sauce: "Hmm, it's saltier than I expected. I need to adjust my understanding of how much salt is needed."
+- When you add the next ingredient: "Based on my previous adjustment, I think this amount will work better."
+
+The second method (TD) is more effective because:
+1. You learn from each step, not just the final result
+2. You constantly adjust your expectations based on what actually happens
+3. You don't need to finish cooking to improve
+4. Your understanding gets better with each adjustment
+
+This is exactly how Temporal Difference learning works in reinforcement learning. At each step, it:
+1. Makes a prediction about what will happen
+2. Sees what actually happens
+3. Calculates the difference between prediction and reality
+4. Uses this difference to improve its next prediction
+
+This continuous cycle of prediction, observation, and adjustment makes TD learning both efficient and adaptable.
+
 ## 1. Introduction
 
 Temporal Difference (TD) learning is a class of model-free reinforcement learning algorithms that learn by bootstrapping from the current estimate of the value function. Unlike Monte Carlo methods that wait until the end of an episode, TD methods update estimates based on the difference between temporally successive predictions.
