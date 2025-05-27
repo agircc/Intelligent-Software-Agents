@@ -1,6 +1,6 @@
 # Temporal Difference Learning in Reinforcement Learning
 
-## 0. A Concrete Example: Food Delivery Tracking
+## 1. A Concrete Example: Food Delivery Tracking
 
 Imagine you order food delivery through an app. The app initially estimates your food will arrive in 30 minutes. As you wait, you keep checking the app and update your expectation based on new information:
 
@@ -12,18 +12,34 @@ Imagine you order food delivery through an app. The app initially estimates your
 
 At each step, you revise your prediction of when the food will arrive, based on the latest available information. You don't wait until the food actually arrives to learn; instead, you continuously update your expectations as new data comes in. This is the essence of Temporal Difference learning: learning and adjusting predictions step by step, as new evidence appears, rather than only after the final outcome is known.
 
-## 1. Introduction
+## 2. Real-World Application Scenarios of TD Learning
+
+Temporal Difference (TD) learning is widely used in various domains where real-time, step-by-step learning and adaptation are crucial. Here are some concrete scenarios that highlight its value:
+
+- **Game Playing (e.g., Chess, Go, Backgammon)**: TD learning enables agents to improve their strategies by updating value estimates after every move, not just at the end of the game. This allows for faster and more robust learning, as seen in TD-Gammon and AlphaGo.
+
+- **Robotics and Autonomous Control**: Robots use TD learning to adapt their behavior in dynamic environments, such as navigating through obstacles or learning to walk, by continuously updating their value functions based on immediate feedback.
+
+- **Financial Trading**: TD methods help trading algorithms adjust their predictions of asset values and optimize trading strategies in response to new market data, rather than waiting for the end of a trading period.
+
+- **Recommendation Systems**: Online platforms use TD learning to update user preference models in real time as users interact with content, leading to more personalized and timely recommendations.
+
+- **Smart Grid and Energy Management**: TD learning is used to optimize energy consumption and distribution by continuously updating predictions about demand and supply, enabling adaptive and efficient control.
+
+These scenarios demonstrate the practical value of TD learning: it allows systems to learn and adapt on the fly, making it ideal for environments where feedback is incremental and decisions must be updated frequently.
+
+## 3. Introduction
 
 Temporal Difference (TD) learning is a class of model-free reinforcement learning algorithms that learn by bootstrapping from the current estimate of the value function. Unlike Monte Carlo methods that wait until the end of an episode, TD methods update estimates based on the difference between temporally successive predictions.
 
-### 1.1 Core Concepts
+### 3.1 Core Concepts
 
 - **Bootstrapping**: Using current estimates to update other estimates
 - **TD Error**: The difference between the current estimate and the target estimate
 - **TD(λ)**: A family of algorithms that combine TD and Monte Carlo methods
 - **Eligibility Traces**: A mechanism to handle delayed rewards and credit assignment
 
-### 1.2 Mathematical Formulation
+### 3.2 Mathematical Formulation
 
 The basic TD update rule is:
 
@@ -36,9 +52,9 @@ where:
 - \(\gamma\) is the discount factor
 - \(V(s_{t+1})\) is the value estimate for the next state
 
-## 2. Basic TD Algorithms
+## 4. Basic TD Algorithms
 
-### 2.1 TD(0)
+### 4.1 TD(0)
 
 ```python
 class TD0:
@@ -79,7 +95,7 @@ class TD0:
         self.V[state] += self.learning_rate * td_error
 ```
 
-### 2.2 SARSA (State-Action-Reward-State-Action)
+### 4.2 SARSA (State-Action-Reward-State-Action)
 
 ```python
 class SARSA:
@@ -151,7 +167,7 @@ class SARSA:
         self.Q[state, action] += self.learning_rate * td_error
 ```
 
-### 2.3 Q-Learning
+### 4.3 Q-Learning
 
 ```python
 class QLearning:
@@ -215,9 +231,9 @@ class QLearning:
         self.Q[state, action] += self.learning_rate * td_error
 ```
 
-## 3. Advanced TD Methods
+## 5. Advanced TD Methods
 
-### 3.1 TD(λ)
+### 5.1 TD(λ)
 
 ```python
 class TDLambda:
@@ -268,7 +284,7 @@ class TDLambda:
         self.V += self.learning_rate * td_error * self.eligibility
 ```
 
-### 3.2 Expected SARSA
+### 5.2 Expected SARSA
 
 ```python
 class ExpectedSARSA:
@@ -335,9 +351,9 @@ class ExpectedSARSA:
         self.Q[state, action] += self.learning_rate * td_error
 ```
 
-## 4. Implementation Considerations
+## 6. Implementation Considerations
 
-### 4.1 Experience Replay
+### 6.1 Experience Replay
 
 ```python
 class ExperienceReplay:
@@ -377,7 +393,7 @@ class ExperienceReplay:
         return random.sample(self.buffer, min(batch_size, len(self.buffer)))
 ```
 
-### 4.2 Target Networks
+### 6.2 Target Networks
 
 ```python
 class TargetNetwork:
@@ -413,41 +429,23 @@ class TargetNetwork:
         self.target_network = (1 - tau) * self.target_network + tau * self.main_network
 ```
 
-## 5. Practical Applications
+## 7. Advantages and Disadvantages
 
-### 5.1 Game Playing
-
-TD methods are particularly effective in games with:
-- Continuous state spaces
-- Immediate rewards
-- Need for online learning
-- Real-time decision making
-
-### 5.2 Robotics
-
-In robotics applications, TD methods can be used for:
-- Real-time control
-- Continuous learning
-- Adaptive behavior
-- Multi-step planning
-
-## 6. Advantages and Disadvantages
-
-### 6.1 Advantages
+### 7.1 Advantages
 
 1. **Online Learning**: Can learn from each step
 2. **Model-Free**: No need for environment model
 3. **Efficient Updates**: Updates estimates immediately
 4. **Works with Continuing Tasks**: Can handle non-episodic problems
 
-### 6.2 Disadvantages
+### 7.2 Disadvantages
 
 1. **Bias in Estimates**: Due to bootstrapping
 2. **Sensitivity to Parameters**: Learning rate and discount factor
 3. **Initialization Dependent**: Performance depends on initial estimates
 4. **Local Optima**: May get stuck in suboptimal policies
 
-## 7. Best Practices
+## 8. Best Practices
 
 1. **Parameter Tuning**:
    - Learning rate scheduling
@@ -464,7 +462,7 @@ In robotics applications, TD methods can be used for:
    - Target networks
    - Gradient clipping
 
-## 8. Future Directions
+## 9. Future Directions
 
 1. **Deep TD Learning**:
    - Deep Q-Networks (DQN)
@@ -481,7 +479,7 @@ In robotics applications, TD methods can be used for:
    - Centralized Training
    - Decentralized Execution
 
-## 9. References
+## 10. References
 
 1. Sutton, R. S., & Barto, A. G. (2018). Reinforcement learning: An introduction. MIT press.
 2. Watkins, C. J., & Dayan, P. (1992). Q-learning. Machine learning, 8(3-4), 279-292.
